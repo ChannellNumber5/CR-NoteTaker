@@ -16,3 +16,5 @@
 
 -[JSON.stringify Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
+-[Deploying to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs?singlepage=true#set-up)
+
