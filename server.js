@@ -4,7 +4,7 @@ const path = require('path'); //controls or parses file paths, to my understandi
 
 const app = express();
 
-const PORT = 3001;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.static('public'));
 
