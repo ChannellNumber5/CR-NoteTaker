@@ -21,3 +21,5 @@
 Ran into an issue with `heroku create` command not initializing with the message `Git remote heroku added` and below link had the fix:
 
 -[Stack Overflow for Git remote heroku](https://stackoverflow.com/questions/30255058/heroku-deployment-git-remote-not-added)
+
+-[Using array.prototype.map()](https://www.digitalocean.com/community/tutorials/4-uses-of-javascripts-arraymap-you-should-know)
