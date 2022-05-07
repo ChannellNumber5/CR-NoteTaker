@@ -16,6 +16,7 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
     ); // should return the notes.html file
 
+
 app.get('/api/notes', (req, res) => {
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) {
@@ -75,5 +76,9 @@ app.delete('/api/notes/:id', (req, res) => {
         }
     })
 }) // should delete selected note that's passed into the post? or mybae it will filter through the posts and delete based on matching id the id of the selected post with the note stored in the database
+
+app.get('*', (req, res) => 
+    res.sendFile(path.join(__dirname, '/public/index.html'))
+    ); // should return the index.html file for any route that is not specified
 
 app.listen(PORT, () => console.log(`Server is activated! App listening at ${PORT}`));
