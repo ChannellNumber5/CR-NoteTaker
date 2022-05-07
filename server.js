@@ -7,6 +7,9 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 app.use(express.static('public'));
 
 app.get('/notes', (req, res) => 
@@ -25,21 +28,26 @@ app.get('/api/notes', (req, res) => {
 }); //should read file and return all saved notes as JSON
 
 app.post('/api/notes', (req, res) => {
+    const {title, text} = req.body;
+    const newNote = {title, text};
+    console.log(newNote);
+
+
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) {
             console.error(err)
             res.send.status(500);
         } else {
             const parsedNotes = JSON.parse(data);
-            const newNote = req.body;
-            console.log(newNote);
-            const parsedNewNote = JSON.parse(newNote);
             const noteIDs = parsedNotes.map(el => { return el.id});
             console.log(noteIDs);
-            parsedNewNote.id = createId(noteIDs);
-            parsedNotes.unshift(parsedNewNote);
-            fs.writeFile('./db/db.json', JSON.stringify(parsedNotes), (err) => err ? console.error(err) : console.log('Notes saved successfully!'));
-            res.send.status(200)
+            newNote.id = createId(noteIDs);
+            console.log(parsedNotes);
+            parsedNotes.unshift(newNote);
+            const savedNotes = JSON.stringify(parsedNotes);
+            console.log(savedNotes);
+            fs.writeFile('./db/db.json', savedNotes, (err) => err ? console.error(err) : console.log('Note saved successfully!'));
+            res.status(200).json(`Note ${newNote.id} saved successfully`)
         }
     })
 }) //should receive new note and save on the request body and add it to db.json file
