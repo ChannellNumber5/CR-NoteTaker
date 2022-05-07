@@ -52,6 +52,28 @@ app.post('/api/notes', (req, res) => {
     })
 }) //should receive new note and save on the request body and add it to db.json file
 
-app.delete('/api/notes', (req, res) => {}) // should delete selected note that's passed into the post? or mybae it will filter through the posts and delete based on matching id the id of the selected post with the note stored in the database
+app.delete('/api/notes/:id', (req, res) => {
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        if (err) {
+            console.error(err)
+            res.send.status(500);
+        } else {
+            const parsedNotes = JSON.parse(data);
+            const noteIDs = parsedNotes.map(el => { return el.id});
+            let index;
+            const id = req.params.id.toLowerCase();
+            for(let i=0; i < noteIDs.length; i++) {
+                if(id === noteIDs[i].toLowerCase()) {
+                    index = i;
+                }
+            }
+            parsedNotes.pop(index);
+            const savedNotes = JSON.stringify(parsedNotes);
+            console.log(savedNotes);
+            fs.writeFile('./db/db.json', savedNotes, (err) => err ? console.error(err) : console.log('Note deleted successfully!'));
+            res.status(200).json(`Note ${id} deleted successfully`)
+        }
+    })
+}) // should delete selected note that's passed into the post? or mybae it will filter through the posts and delete based on matching id the id of the selected post with the note stored in the database
 
 app.listen(PORT, () => console.log(`Server is activated! App listening at ${PORT}`));
