@@ -1,14 +1,8 @@
 
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L','M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-const errorArray = [{
-    title:"Test Title",
-    text:"Test text"
-}];
 
-const testArray = errorArray.map(el => {return el.id});
-console.log(testArray);
 
 function createId(idArray) {
+    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L','M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     let randId;
     if(idArray === undefined || idArray === null) {
         randId = Math.floor(Math.random()*1000) + alphabet[Math.floor(Math.random()*26)]
@@ -27,5 +21,4 @@ function createId(idArray) {
  return randId;
 }
 
-console.log(createId(['900B', '476A', '592C', '786K']));
-console.log(createId(testArray));
+module.exports = createId;
