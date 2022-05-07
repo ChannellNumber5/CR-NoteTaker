@@ -12,29 +12,31 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
     ); // should return the notes.html file
 
-app.get('api/notes', (req, res) => {
-    const savedNotes = fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+app.get('/api/notes', (req, res) => {
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) {
             console.error(err);
         } else {
-            res.send(savedNotes);
+            const savedNotes = JSON.parse(data);
+            res.json(savedNotes);
+            console.log(savedNotes);
         }
     
     })
 }); //should read file and return all saved notes as JSON
 
-app.post('/api/notes', (req, res) => {
-    const savedNotes = fs.readFile('./db/db.json', 'utf-8', (err, data) => {
-        if (err) {
-            console.error(err)
-        } else {
-            const parsedNotes = JSON.parse(savedNotes);
-            const newNote = req.body;
-            const parsedNewNote = JSON.parse(newNote);
-            parsedNewNote.id = createId();
-        }
-    })
-}) //should receive new note and save on the request body and add it to db.json file
+// app.post('/api/notes', (req, res) => {
+//     const savedNotes = fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+//         if (err) {
+//             console.error(err)
+//         } else {
+//             const parsedNotes = JSON.parse(savedNotes);
+//             const newNote = req.body;
+//             const parsedNewNote = JSON.parse(newNote);
+//             parsedNewNote.id = createId();
+//         }
+//     })
+// }) //should receive new note and save on the request body and add it to db.json file
 
 app.delete('/api/notes', (req, res) => {}) // should delete selected note that's passed into the post? or mybae it will filter through the posts and delete based on matching id the id of the selected post with the note stored in the database
 
