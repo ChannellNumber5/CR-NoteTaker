@@ -19,11 +19,19 @@ Since this application is deployed on heroku, there is nothing that the user nee
 
 ## Credits
 The client side static files were a boilerplate provided by the University of Washingtong Coding Bootcamp along with the index.js base code. All other code (server.js to handle the API requests, id creator script) were coded by Christina Robinson.
+
+Email: [CLRCoding@gmail.com](mailto:CLRCoding@gmail.com)
+
+Github: [ChannellNumber5](https://github.com/ChannellNumber5)
  
 ## Tests
 There were no tests created or run for this specific application
 
 ## License
+
+This project is licensed under the MIT license.
+
+[MIT License](https://opensource.org/licenses/MIT)
 
 ## Resources
 
